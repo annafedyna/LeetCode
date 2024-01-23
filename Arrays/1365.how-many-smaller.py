@@ -1,4 +1,7 @@
 def smallerNumbersThanCurrent(nums: list[int]) -> list[int]:
+    '''
+    Time Complexity : O(n * n)
+    '''
     d ={}
     for i in range(len(nums)):
         count = 0
@@ -8,5 +11,11 @@ def smallerNumbersThanCurrent(nums: list[int]) -> list[int]:
         d[i] = count
     return [value for key, value in d.items()]
 
+def smallerNumbersThanCurrent2(nums: list):
+    '''
+    Time Complexity : O(n * logn)
+    '''
+    sorting = sorted(nums)
+    return [sorting.index(i) for i in nums]
 
-print(smallerNumbersThanCurrent([8,1,2,2,3]))
+print(smallerNumbersThanCurrent2([8,1,2,2,3]))
