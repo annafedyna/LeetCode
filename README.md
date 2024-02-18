@@ -1,4 +1,4 @@
-# This folder contains solutions to various LeetCode problems.
+### Contains solutions to various LeetCode problems.
 
 ## Languages Used
 
