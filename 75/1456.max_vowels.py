@@ -1,6 +1,8 @@
 from collections import deque
 
 def maxVowels(s: str, k: int) -> int:
+    """ Given a string s and an integer k, 
+    return the maximum number of vowel letters in any substring of s with length k"""
     v = ['a','e', 'o', 'i', 'u']
     
     sub = deque(s[:k])
