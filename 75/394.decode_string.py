@@ -1,26 +1,26 @@
 def decodeString(s: str) -> str:
     stack = []
-    news = ''
+    sub = ''
     i = 0
+    num = ''
     while i < len(s):
-        if s[i] == '[':
-            stack.append(s[i])
+        while s[i].isdigit():
+            num += s[i]
             i += 1
-            while stack:
-                if s[i] == ']' and len(stack) <= 1:
-                    stack.pop()
-                    d = decodeString(news)
-                elif s[i] == ']' and len(stack) > 1:
-                    news += s[i]
-                    stack.pop()
-                elif s[i] == '[':
-                    stack.append(s[i])
-                    news += s[i]
-                else:
-                    news += s[i]
-                i += 1
-        i += 1
-    return news
+        if num != '': stack.append(int(num))
+        num = ''
+        
+        if s[i] == ']':
+            while stack[-1] != '[' :
+                sub = stack.pop() + sub
+            stack.pop()
+            n = stack.pop()
+            stack.append(n * sub)
+            sub = ''
+        else: 
+            stack.append(s[i])
+        i +=1       
+    return ''.join(stack)
 
 print(decodeString('3[a2[c]]'))
 
@@ -31,5 +31,5 @@ if __name__ == '__main__':
         ('','')
     ]
     
-    # for text, decoded_text in cases:
-    #     assert decodeString(text) == decoded_text
+    for text, decoded_text in cases:
+        assert decodeString(text) == decoded_text
