@@ -1,41 +1,40 @@
-
+'''
+Time Complexity: O(n^2)
+Space Complexity: O(n)
+'''
 def predictPartyVictory(senate: str) -> str:
     q = list(senate)
-    d = {'D': 0, 'R': 0}
-    i = 0
-    d_count =0 
+    d_count = 0
     r_count = 0
+
+    while ('R' in q) and ('D' in q):
+        new_q = []
+        for element in q[:]:
+            if element == 'D':
+                if r_count > 0:
+                    r_count -= 1  
+                else:
+                    new_q.append('D')
+                    d_count += 1
+            elif element == 'R':
+                if d_count > 0:
+                    d_count -= 1
+                else:
+                    new_q.append('R')
+                    r_count += 1
+        q = new_q
     
-    while i < len(senate):
-        element = q.pop(0)
-        if element == 'D' and r_count == 0:
-            d['D'] += 1
-            d_count += 1
-        elif element == 'R' and d_count == 0:
-            d['R'] += 1
-            r_count += 1
-        elif element == 'D' and r_count != 0:
-            r_count -= 1
-        else:
-            d_count -= 1
-        i += 1
-        
-    if d['D'] > d['R']:
-        return 'Dire'
-    elif d['D'] < d['R']:
-        return 'Radiant'
+    return 'Radiant' if  'R' in q else 'Dire'
     
-    return 'Radiant' if senate[-1] == 'R' else 'Dire'
-    
-print(predictPartyVictory('RDD'))
+# print(predictPartyVictory('DDDDRRDDDRDRDRRDDRDDDRDRRRRDRRRRRDRDDRDDRRDDRRRDDRRRDDDDRRRRRRRDDRRRDDRDDDRRRDRDDRDDDRRDRRDRRRDRDRDR'))
 
 if __name__ == '__main__':
     cases = [
         ('RD','Radiant'),
         ('RDD','Dire'),
-        ('DDRRR','Dire')
+        ('DDRRR','Dire'),
+        ('DDDDRRDDDRDRDRRDDRDDDRDRRRRDRRRRRDRDDRDDRRDDRRRDDRRRDDDDRRRRRRRDDRRRDDRDDDRRRDRDDRDDDRRDRRDRRRDRDRDR', 'Dire')
     ]
     
     for text, decoded_text in cases:
         assert predictPartyVictory(text) == decoded_text
-
