@@ -28,3 +28,22 @@ class Solution:
     
 s = Solution() 
 print(s.deleteMiddle(ListNode(1,ListNode(2,ListNode(3, ListNode(4, ListNode(5, ListNode(6))))))))
+
+
+# Solution 2
+def deleteMiddle(head) :
+    if head==None: return None 
+    if head.next==None: return None
+    list_object=[]
+
+    temp=head
+
+    while temp:
+        list_object.append(temp)
+        temp=temp.next 
+    
+    mid=len(list_object)//2
+
+    list_object[mid-1].next=list_object[mid].next
+
+    return list_object[0]
