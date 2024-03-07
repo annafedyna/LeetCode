@@ -21,5 +21,12 @@ print(s.reverseList(ListNode(1,ListNode(2,ListNode(3, ListNode(4, ListNode(5))))
 
 class Solution2:
     def reverseList(self, head):
+        if not head: return None
         
-        return 
+        prev = None
+        while head:
+            t = head.next
+            head.next = prev
+            prev = head
+            head = t
+        return prev
